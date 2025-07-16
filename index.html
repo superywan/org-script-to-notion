@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>org-script-to-notion</title>
+    <script src="./main.js" type="module"></script>
+    <script src="./requests.js" type="module"></script>
+  </head>
+  <body>
+    <h1>org-script-to-notion</h1>
+    <p>
+      <input type="text" name="notionDatabaseId" id="notionDatabaseId" />
+      <label for="databaseId">Notion Database ID</label>
+    </p>
+    <p>
+      <input
+        type="text"
+        name="internalIntegrationSecret"
+        id="internalIntegrationSecret"
+      />
+      <label for="internalIntegrationSecret">Internal Integration Secret</label>
+    </p>
+    <p>
+      <input type="text" name="activationCode" id="activationCode" />
+      <label for="secretKey">Activation Code</label>
+    </p>
+
+    <label for="language">Select Language:</label>
+    <select name="language" id="language">
+      <option value="KO">KO</option>
+      <option value="EN" disabled>EN</option>
+    </select>
+
+    <button id="button" type="button">Import Scripts</button>
+    <p><textarea id="log" name="log" rows="10" cols="33"></textarea></p>
+  </body>
+</html>

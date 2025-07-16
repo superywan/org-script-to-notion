@@ -1,13 +1,15 @@
 import dotenv from "dotenv";
-import fs from "fs";
 import { Client } from "@notionhq/client";
+// import fs from "fs";
+
 import {
   getCategoriesAPI,
   getJWORGTokenAPI,
   getSubCategoriesAPI,
   getSubtitleAPI,
   getVideoListAPI,
-} from "./api.js";
+} from "./requests.js";
+import { LANGUAGE } from "./language.js";
 
 dotenv.config();
 const notion = new Client({
@@ -16,8 +18,6 @@ const notion = new Client({
 // console.log(process.env.NOTION_TOKEN);
 // console.log(process.env.NOTION_DATABASE_ID);
 
-const LINK_LANGUAGE_KO = "ko";
-const LINK_LANGUAGE_EN = "en";
 let listOfExistingTitles = null;
 
 const getListOfExistingTitles = async () => {
@@ -137,10 +137,12 @@ const createNotionPage = (
         title: [{ text: { content: title } }],
       },
       Category: {
-        multi_select: [{ name: category }],
+        multi_select: [{ name: LANGUAGE["KO"].CATEGORY[category] }],
       },
       "Sub Category": {
-        multi_select: [{ name: subCategory }],
+        multi_select: [
+          { name: LANGUAGE["KO"].SUB_CATEGORY[category][subCategory] },
+        ],
       },
       "Link to Video": {
         url: url,
@@ -167,6 +169,8 @@ const createNotionPage = (
 };
 
 const importToNotion = async (config, category, subCategory) => {
+  LANGUAGE.KO.TWO_DIGITS;
+
   // console.log(`Getting media list from ${subCategory}...`);
   const videoList = await getVideoListAPI(subCategory, config);
   console.log(
@@ -176,11 +180,11 @@ const importToNotion = async (config, category, subCategory) => {
   // console.log("Importing to Notion...");
   let successRate = 0;
   let existRate = 0;
-  let failedVideo = ["Subtitles from below videos failed importing...\n"];
+  // let failedVideo = ["Subtitles from below videos failed importing...\n"];
   for (let i = 0; i < videoList.length; i++) {
     const title = await videoList[i].title;
     const date = await videoList[i].firstPublished.split("T")[0];
-    const url = `https://www.jw.org/${LINK_LANGUAGE_KO}/라이브러리/videos/#${LINK_LANGUAGE_KO}/mediaitems/${subCategory}/${videoList[i].languageAgnosticNaturalKey}`;
+    const url = `https://www.jw.org/${LANGUAGE["KO"].TWO_DIGITS}/${LANGUAGE["KO"].LIBRARY}/videos/#${LANGUAGE["KO"].TWO_DIGITS}/mediaitems/${subCategory}/${videoList[i].languageAgnosticNaturalKey}`;
     const duration = await videoList[i].durationFormattedHHMM;
     const subtitles = await videoList[i].files[0].subtitles;
 
