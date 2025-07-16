@@ -169,8 +169,6 @@ const createNotionPage = (
 };
 
 const importToNotion = async (config, category, subCategory) => {
-  LANGUAGE.KO.TWO_DIGITS;
-
   // console.log(`Getting media list from ${subCategory}...`);
   const videoList = await getVideoListAPI(subCategory, config);
   console.log(
