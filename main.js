@@ -137,11 +137,21 @@ const createNotionPage = (
         title: [{ text: { content: title } }],
       },
       Category: {
-        multi_select: [{ name: LANGUAGE["KO"].CATEGORY[category] }],
+        multi_select: [
+          {
+            name: LANGUAGE["KO"].CATEGORY[category]
+              ? LANGUAGE["KO"].CATEGORY[category]
+              : category,
+          },
+        ],
       },
       "Sub Category": {
         multi_select: [
-          { name: LANGUAGE["KO"].SUB_CATEGORY[category][subCategory] },
+          {
+            name: LANGUAGE["KO"].SUB_CATEGORY[category][subCategory]
+              ? LANGUAGE["KO"].SUB_CATEGORY[category][subCategory]
+              : subCategory,
+          },
         ],
       },
       "Link to Video": {

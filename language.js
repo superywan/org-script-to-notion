@@ -92,7 +92,7 @@ export const LANGUAGE = {
         BibleBooks: "성경의 책들",
         VODBibleTeachings: "성경의 가르침",
         VODBibleAccounts: "성경 이야기",
-        VODBibleMedia: "인물, 장소, 사물",
+        VODBibleMedia: "인물/장소/사물",
         VODBibleTranslations: "성경 번역",
         VODBiblePrinciples: "성경 원칙 적용하기",
         VODBibleCreation: "창조",
